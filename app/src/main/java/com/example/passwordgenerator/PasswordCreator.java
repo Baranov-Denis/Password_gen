@@ -6,6 +6,19 @@ public class PasswordCreator {
     //Если MAX_CHAR = 125, тогда не получаем char с номером 125
     private final static int MAX_CHAR = 126;
     private final static int MIN_CHAR = 33;
+
+    private final static int[] fullCharArray = {33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,
+    51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,
+    84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,
+    113,114,115,116,117,118,119,120,121,122,123,124,125};
+
+
+    private final static int[] cutCharArray = {33,40,41,43,45,48,49,50,51,52,53,54,55,56,57,61,62,65,66,67,68,
+    69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,95,97,98,99,100,101,102,103,104,105,106,
+    107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122};
+
+    private int[] currentArray;
+
     //Не менять VAR_1 и VAR_2 - оптимально равномерное распределение
     private final static int VAR_1 = 37;
     private final static int VAR_2 = 69;
@@ -22,6 +35,8 @@ public class PasswordCreator {
     }
 
     private String startCreatingString(String resourceName, String key) {
+        if(strongPassword) currentArray = fullCharArray;
+        else currentArray = cutCharArray;
         int[] intArrayFromResource = correctString(resourceName.trim(), VAR_1);
         int[] intArrayFromKey = correctString(key.trim(), VAR_2);
         int[] intArrayForPassword = process(intArrayFromResource, intArrayFromKey);
@@ -61,26 +76,25 @@ public class PasswordCreator {
 
     //Получаем разность массивов
 
-    private int[] process(int[] one, int[] two) {
+    private  int[] process(int[] one, int[] two ){
         int[] resultArr = new int[passwordLength];
-        for (int i = 0; i < passwordLength; i++) {
+        for(int i = 0 ; i < passwordLength ; i++){
             int a = one[i];
             int b = two[i];
-            int result = subtractingChars(a,b);
+            int result ;
+           // if(strongPassword) {
+                result =   subtractingChars(a, b);
+         //   }else {
+           //     result =   subtractingChars(a, b, cutCharArray);
+        //    }
 
-
-            if (!strongPassword){
-
-                if (result == 39 ) result =  subtractingChars(a + passwordLength / (i+1) , b - passwordLength/ (i+1));
-
-            }
 
             resultArr[i] = result;
         }
-        return resultArr;
+        return resultArr ;
     }
 
-    private int subtractingChars(int a , int b){
+   /* private int subtractingChars(int a , int b){
         int result = a - b;
         while(result > MAX_CHAR){
             result = result - b;
@@ -90,97 +104,35 @@ public class PasswordCreator {
             result = MAX_CHAR - (MIN_CHAR - result) ;
         }
         return result;
+    }*/
+
+    private int subtractingChars(int a , int b){
+        int result = a - b;
+        while(result > currentArray.length){
+            result = result - b;
+        }
+
+        while(result < 0){
+            result = currentArray.length - (0 - result) ;
+        }
+
+        return result;
+
     }
 
+    /*
     private String createStringFromIntegerArray(int[] intArray) {
         StringBuilder stringFromArray = new StringBuilder();
         for (int integer : intArray) stringFromArray.append((char) integer);
         return stringFromArray.toString();
-    }
-
-/*
-    //show result
-    private  void showPass(Integer[] arr ){
-        // System.out.println( );
-        // System.out.println( );
-        System.out.println("Password :");
-        //   System.out.println( );
-        System.out.print("                  ");
-        for (Integer ch : arr) System.out.print( (char) (int) ch);
-        //  System.out.println( );
-    }
-
-    private int passwordLength = 8;
-
-    public int getPasswordLength() {
-        return passwordLength;
-    }
-
-    public String createPassword(String resourceName, String key, int passwordLength) {
-        this.passwordLength = passwordLength;
-        return generatePassword(correctString(resourceName.trim(), 2),correctString(key.trim(),1));
-    }
-
-
-    private String correctString(String stringForCorrection, int variation) {
-        StringBuilder correctedResourceName = new StringBuilder();
-        while(stringForCorrection.length() < passwordLength){
-            stringForCorrection += stringForCorrection;
-        }
-        int charHash = passwordLength;
-        for(int i = 0 ; i < stringForCorrection.length() ; i++){
-            charHash += stringForCorrection.charAt(i) * variation;
-        }
-        for (int b = 0 ; b < passwordLength ; b++){
-            char temp = (char) (charHash - stringForCorrection.charAt(b));
-            charHash = temp;
-            correctedResourceName.append(temp);
-        }
-        return correctedResourceName.toString();
-    }
-
-
-    private char charPlus(char firstChar , char secondChar){
-        int result = (int) firstChar + (int) secondChar;
-        while (result > 125){
-            result = 33 + (result - 125);
-        }
-
-        return (char) result;
-    }
-
-    private char charMinus(char firstChar , char secondChar){
-        int result = (int) firstChar - (int) secondChar;
-       while (result < 33){
-           result = 125 - Math.abs(result);
-       }
-       while (result > 125){
-           result = result - (int) secondChar;
-       }
-        while (result < 33){
-            result = 125 - Math.abs(result);
-        }
-
-        return (char) result;
-    }
-
-    private String generatePassword(String resourceName , String key){
-        StringBuilder password = new StringBuilder();
-        for (int i = 0 ; i < passwordLength ; i++){
-            char firstChar = resourceName.charAt(i);
-            char secondChar = key.charAt(i);
-            if(i%2 == 0){
-                password.append(charMinus(firstChar , secondChar));
-                if(charMinus(firstChar , secondChar) > 125 || charMinus(firstChar , secondChar) < 33){
-                    return "Error minus";
-                }
-            }else {
-                password.append(charPlus(firstChar , secondChar));
-                if(charPlus(firstChar , secondChar) > 125 || charPlus(firstChar , secondChar) < 33){
-                    return "Error plus";
-                }
-            }
-        }
-        return password.toString();
     }*/
+    private String createStringFromIntegerArray(int[] intArray) {
+        StringBuilder stringFromArray = new StringBuilder();
+
+            for (int integer : intArray) stringFromArray.append((char) currentArray[integer]);
+
+        return stringFromArray.toString();
+    }
+
+
 }
