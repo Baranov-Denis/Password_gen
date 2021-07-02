@@ -23,19 +23,21 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private PasswordCreator passwordCreator;
-    private boolean strongPassword = true;
+    public static boolean strongPassword = true;
 
 
     ClipboardManager clipboardManager;
     ClipData clipData;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         passwordCreator = new PasswordCreator();
         setContentView(R.layout.activity_main);
-        setPasswordLengthToTextView();
-        setSeekBar();
+        //setPasswordLengthToTextView();
+      //  setSeekBar();
         setOnClickButton();
 
         //Подключение toolBar
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //Подключение переключателя для изменения сложности пароля
-        addSwitchForStrongPassword();
+      //  addSwitchForStrongPassword();
 
     }
 
@@ -57,57 +59,62 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
         switch (item.getItemId()) {
             case R.id.action_help:
-                Intent intent = new Intent(this,HelpActivity.class);
-                startActivity(intent);
+               Intent intent1 = new Intent(this,HelpActivity.class);
+                startActivity(intent1);
+                return true;
+            case R.id.action_settings:
+               Intent intent2 = new Intent(this,SettingsActivity.class);
+                startActivity(intent2);
                 return true;
             default:
             return super.onOptionsItemSelected(item);
         }
     }
+//
+//    //Подключение переключателя для изменения сложности пароля
+//    private void addSwitchForStrongPassword(){
+//        SwitchCompat switch1 = findViewById(R.id.switch1);
+//
+//        switch1.setOnCheckedChangeListener((buttonView, isChecked) ->{
+//
+//            if(isChecked){
+//                strongPassword = true;
+//
+//            }else{
+//                strongPassword = false;
+//
+//            }
+//        });
+//    }
 
-    //Подключение переключателя для изменения сложности пароля
-    private void addSwitchForStrongPassword(){
-        SwitchCompat switch1 = findViewById(R.id.switch1);
+//    private void setPasswordLengthToTextView() {
+//        TextView textView =  findViewById(R.id.seekBarValue);
+//        textView.setText(String.valueOf(passwordCreator.getPasswordLength()));
+//    }
 
-        switch1.setOnCheckedChangeListener((buttonView, isChecked) ->{
-
-            if(isChecked){
-                strongPassword = true;
-
-            }else{
-                strongPassword = false;
-
-            }
-        });
-    }
-
-    private void setPasswordLengthToTextView() {
-        TextView textView =  findViewById(R.id.seekBarValue);
-        textView.setText(String.valueOf(passwordCreator.getPasswordLength()));
-    }
-
-    private void setSeekBar() {
-        SeekBar seekBar =  findViewById(R.id.seekBar);
-        TextView textView = findViewById(R.id.seekBarValue);
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textView.setText(String.valueOf(progress));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-    }
+//    private void setSeekBar() {
+//        SeekBar seekBar =  findViewById(R.id.seekBar);
+//        TextView textView = findViewById(R.id.seekBarValue);
+//        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                textView.setText(String.valueOf(progress));
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//        });
+//    }
 
 
     private void setOnClickButton() {
@@ -122,10 +129,10 @@ public class MainActivity extends AppCompatActivity {
         String resourceName = resourceNameEdit.getText().toString();
         String key = keyEdit.getText().toString();
         SeekBar seekBar = findViewById(R.id.seekBar);
-        int passwordLength = seekBar.getProgress();
+      //  int passwordLength = seekBar.getProgress();
 
         if(!resourceName.equals("") && !key.equals("")) {
-            generatedPassword = passwordCreator.createPassword(resourceName, key, passwordLength,strongPassword);
+            generatedPassword = passwordCreator.createPassword(resourceName, key, PasswordCreator.passwordLength,strongPassword);
             TextView passwordField = findViewById(R.id.generated_password);
             passwordField.setText(generatedPassword);
             copyPasswordToClipboard(generatedPassword);

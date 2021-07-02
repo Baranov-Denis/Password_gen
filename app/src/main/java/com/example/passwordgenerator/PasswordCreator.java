@@ -6,7 +6,7 @@ public class PasswordCreator {
      * При вызове метода createPassword(String resourceName, String key, int passwordLength, boolean strongPassword)
      * устанавливается переданная длинна
      */
-    private int passwordLength = 25;
+    public static int passwordLength = 25;
 
     /**
      * Массив из всех символов a-z A-Z и символы
@@ -47,15 +47,15 @@ public class PasswordCreator {
      * если определена true  то  ->  fullCharArray
      * если определена false то  ->  cutCharArray
      */
-    private boolean strongPassword;
+    public static boolean strongPassword = true;
 
     public int getPasswordLength() {
         return passwordLength;
     }
 
     public String createPassword(String resourceName, String key, int passwordLength, boolean strongPassword) {
-        this.passwordLength = passwordLength;
-        this.strongPassword = strongPassword;
+      //  this.passwordLength = passwordLength;
+      //  this.strongPassword = strongPassword;
         return startCreatingString(resourceName, key);
     }
 

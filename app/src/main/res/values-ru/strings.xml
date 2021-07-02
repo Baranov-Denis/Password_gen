@@ -7,6 +7,7 @@
     <string name="select_password_length">Задайте длину пароля:</string>
     <string name="password_was_copied">\n Пароль скопирован \n</string>
     <string name="help">Помощь</string>
+    <string name="settings">Настройки</string>
     <string name="password_complexity">Более сложный пароль</string>
     <string name="help_text">   Вам больше не нужно запоминать множество паролей для различных сайтов!\n
             Теперь стало возможным сделать процесс создания паролей очень простым. Для начала вам потребуется выбрать длину вашего нового
