@@ -5,11 +5,21 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
     <color name="dark">#1E1E1E</color>
+    <color name="text_light">#727272</color>
+    <color name="text_dark">#ABABAB</color>
+    <color name="dark_for_password">#323232</color>
+    <color name="light_for_password">#E0E0E0</color>
+
+
+
     <color name="white">#FFFFFFFF</color>
+    <color name="almost_white">#C8C8C8</color>
     <color name="yellow">#FEC007</color>
     <color name="yellow_light">#ffecb3</color>
-    <color name="yellow_dark">#8c3d00</color>
+    <color name="yellow_dark">#DAA609</color>
     <color name="gray">#323232</color>
     <color name="light_gray">#535353</color>
+    <color name="test">#FF0000</color>
 </resources>

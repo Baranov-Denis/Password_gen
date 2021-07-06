@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="border_style">
+        <item name="android:background">@color/text_light</item>
+    </style>
+
+    <style name="password_output_style">
+        <item name="android:textColor">@color/dark</item>
+    </style>
+
+    <style name="button_styles">
+         <item name="backgroundTint">@color/yellow</item>
+        <item name="android:textColor">@color/dark</item>
+    </style>
+
+
+    <style name="background_style">
+        <item name="android:background">@color/light_for_password</item>
+        <item name="android:textColor">@color/text_light</item>
+    </style>
+
+    <style name="text_color">
+        <item name="colorSecondary">@color/yellow_dark</item>
+        <item name="android:textColor">@color/dark</item>
+    </style>
+</resources>

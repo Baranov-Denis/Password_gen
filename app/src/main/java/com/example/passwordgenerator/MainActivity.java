@@ -128,11 +128,11 @@ public class MainActivity extends AppCompatActivity {
         EditText keyEdit = findViewById(R.id.get_key_word);
         String resourceName = resourceNameEdit.getText().toString();
         String key = keyEdit.getText().toString();
-        SeekBar seekBar = findViewById(R.id.seekBar);
+      //  SeekBar seekBar = findViewById(R.id.seekBar);
       //  int passwordLength = seekBar.getProgress();
 
         if(!resourceName.equals("") && !key.equals("")) {
-            generatedPassword = passwordCreator.createPassword(resourceName, key, PasswordCreator.passwordLength,strongPassword);
+            generatedPassword = passwordCreator.createPassword(resourceName, key);
             TextView passwordField = findViewById(R.id.generated_password);
             passwordField.setText(generatedPassword);
             copyPasswordToClipboard(generatedPassword);

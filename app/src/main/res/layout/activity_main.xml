@@ -87,19 +87,19 @@
 
 
             <LinearLayout
+                android:theme="@style/background_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:background="@color/gray"
                 android:orientation="vertical"
                 >
 
                 <TextView
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="10dp"
-                    android:textColor="#969696"
                     android:text="@string/your_password" />
 
                 <TextView
@@ -108,7 +108,14 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:gravity="center"
-                    android:textSize="25sp" />
+                    android:textSize="25sp"
+                    style="@style/password_output_style" />
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    style="@style/border_style" />
             </LinearLayout>
 
 
@@ -125,7 +132,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginHorizontal="10dp"
                     android:text="@string/generate"
-                    android:textColor="@color/dark" />
+                    style="@style/button_styles" />
 
 
             </LinearLayout>

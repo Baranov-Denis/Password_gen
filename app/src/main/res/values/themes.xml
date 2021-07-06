@@ -2,20 +2,32 @@
     <!-- Base application theme. -->
     <style name="Theme.PasswordGenerator" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/yellow</item>
-        <item name="colorPrimaryVariant">@color/yellow</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/yellow</item>
-        <item name="colorSecondaryVariant">@color/white</item>
-        <item name="colorOnSecondary">@color/dark</item>
-        <item name="android:textColor">@color/dark</item>
-        <item name="android:editTextColor">@color/yellow_dark</item>
+        //button
+        <item name="colorPrimary">@color/text_light</item>
 
+//Верхнее поле где зарядка
+        <item name="colorPrimaryVariant">@color/yellow</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/text_light</item>
+
+        <item name="colorOnSecondary">@color/dark</item>
+
+        <item name="android:editTextColor">@color/dark</item>
+        <item name="android:textColor">@color/text_light</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        //Background
+        <item name="android:colorBackground">@color/almost_white</item>
 
-<item name="android:textSize">20sp</item>
+
+        <item name="android:textSize">20sp</item>
     </style>
+
+
+
+
+
+
 </resources>

@@ -9,6 +9,13 @@ public class PasswordCreator {
     public static int passwordLength = 25;
 
     /**
+     * Переменная которая определяет какой массив использовать
+     * если определена true  то  ->  fullCharArray
+     * если определена false то  ->  cutCharArray
+     */
+    public static boolean strongPassword = true;
+
+    /**
      * Массив из всех символов a-z A-Z и символы
      * Каждое число обозначает числовое представление символа
      *
@@ -42,20 +49,11 @@ public class PasswordCreator {
     private final static int VAR_1 = 37;
     private final static int VAR_2 = 69;
 
-    /**
-     * Переменная которая определяет какой массив использовать
-     * если определена true  то  ->  fullCharArray
-     * если определена false то  ->  cutCharArray
-     */
-    public static boolean strongPassword = true;
 
-    public int getPasswordLength() {
-        return passwordLength;
-    }
 
-    public String createPassword(String resourceName, String key, int passwordLength, boolean strongPassword) {
-      //  this.passwordLength = passwordLength;
-      //  this.strongPassword = strongPassword;
+
+
+    public String createPassword(String resourceName, String key) {
         return startCreatingString(resourceName, key);
     }
 
