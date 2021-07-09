@@ -7,7 +7,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,12 +25,18 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private PasswordCreator passwordCreator;
-    public static boolean strongPassword = true;
 
+    public static final String APP_PREFERENCES = "mySettings";
+    public static final String PASSWORD_LENGTH = "password_length";
+    public static final String PASSWORD_HARD = "password_hard";
+    private static SharedPreferences mySharedPreference = null;
+
+    public static SharedPreferences getMySharedPreference() {
+        return mySharedPreference;
+    }
 
     ClipboardManager clipboardManager;
     ClipData clipData;
-
 
 
     @Override
@@ -36,24 +44,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         passwordCreator = new PasswordCreator();
         setContentView(R.layout.activity_main);
-        //setPasswordLengthToTextView();
-      //  setSeekBar();
+
         setOnClickButton();
 
+        loadSettings();
         //Подключение toolBar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Подключение переключателя для изменения сложности пароля
-      //  addSwitchForStrongPassword();
-
     }
 
+
+    /**
+     * Загрузка настроек
+     * Загружает длину пароля и положение выключателя сложности
+     */
+    private void loadSettings() {
+        if (mySharedPreference == null) {
+            mySharedPreference = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        }
+        if (mySharedPreference.contains(PASSWORD_LENGTH)) {
+            PasswordCreator.passwordLength = mySharedPreference.getInt(PASSWORD_LENGTH, 0);
+        }
+        if (mySharedPreference.contains(PASSWORD_HARD)) {
+            PasswordCreator.strongPassword = mySharedPreference.getBoolean(PASSWORD_HARD, true);
+        }
+    }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -62,15 +83,15 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.action_help:
-               Intent intent1 = new Intent(this,HelpActivity.class);
+                Intent intent1 = new Intent(this, HelpActivity.class);
                 startActivity(intent1);
                 return true;
             case R.id.action_settings:
-               Intent intent2 = new Intent(this,SettingsActivity.class);
+                Intent intent2 = new Intent(this, SettingsActivity.class);
                 startActivity(intent2);
                 return true;
             default:
-            return super.onOptionsItemSelected(item);
+                return super.onOptionsItemSelected(item);
         }
     }
 //
@@ -128,10 +149,10 @@ public class MainActivity extends AppCompatActivity {
         EditText keyEdit = findViewById(R.id.get_key_word);
         String resourceName = resourceNameEdit.getText().toString();
         String key = keyEdit.getText().toString();
-      //  SeekBar seekBar = findViewById(R.id.seekBar);
-      //  int passwordLength = seekBar.getProgress();
+        //  SeekBar seekBar = findViewById(R.id.seekBar);
+        //  int passwordLength = seekBar.getProgress();
 
-        if(!resourceName.equals("") && !key.equals("")) {
+        if (!resourceName.equals("") && !key.equals("")) {
             generatedPassword = passwordCreator.createPassword(resourceName, key);
             TextView passwordField = findViewById(R.id.generated_password);
             passwordField.setText(generatedPassword);
@@ -139,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void copyPasswordToClipboard(String generatedPassword){
+    private void copyPasswordToClipboard(String generatedPassword) {
         clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         clipData = ClipData.newPlainText("text", generatedPassword);
         clipboardManager.setPrimaryClip(clipData);
