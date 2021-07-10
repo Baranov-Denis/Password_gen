@@ -2,7 +2,6 @@ package com.example.passwordgenerator;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.ClipData;
@@ -15,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 //import android.widget.Toolbar;
@@ -39,9 +37,12 @@ public class MainActivity extends AppCompatActivity {
     ClipData clipData;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         passwordCreator = new PasswordCreator();
         setContentView(R.layout.activity_main);
 
@@ -85,14 +86,17 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_help:
                 Intent intent1 = new Intent(this, HelpActivity.class);
                 startActivity(intent1);
+                overridePendingTransition(R.anim.translate_down, R.anim.translate_downer);
                 return true;
             case R.id.action_settings:
                 Intent intent2 = new Intent(this, SettingsActivity.class);
                 startActivity(intent2);
+                overridePendingTransition(R.anim.translate_down, R.anim.translate_downer);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+
     }
 //
 //    //Подключение переключателя для изменения сложности пароля
@@ -158,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
             passwordField.setText(generatedPassword);
             copyPasswordToClipboard(generatedPassword);
         }
+
     }
 
     private void copyPasswordToClipboard(String generatedPassword) {

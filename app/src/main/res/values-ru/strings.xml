@@ -5,7 +5,7 @@
     <string name="your_password">Ваш пароль:</string>
     <string name="generate">Сгенерировать!</string>
     <string name="select_password_length">Задайте длину пароля:</string>
-    <string name="password_was_copied">\n Пароль скопирован \n</string>
+    <string name="password_was_copied"> Пароль скопирован </string>
     <string name="help">Помощь</string>
     <string name="settings">Настройки</string>
     <string name="password_complexity">Более сложный пароль</string>

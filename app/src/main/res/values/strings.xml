@@ -5,7 +5,7 @@
     <string name="your_password">Your password:</string>
     <string name="generate">Generate!</string>
     <string name="select_password_length">Select password length:</string>
-    <string name="password_was_copied">\n Password was copied \n</string>
+    <string name="password_was_copied"> Password was copied </string>
     <string name="help">Help</string>
     <string name="password_complexity">More strong password</string>
     <string name="settings">Settings</string>

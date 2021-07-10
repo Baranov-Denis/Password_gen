@@ -5,17 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Context;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class SettingsActivity extends AppCompatActivity {
 
-
-    // private static SharedPreferences mySharedPreference = null;
-    private static SharedPreferences.Editor editor = null;
 
 
     @Override
@@ -30,6 +28,15 @@ public class SettingsActivity extends AppCompatActivity {
         setSeekBar();
         setPasswordLengthToTextView();
         addSwitchForStrongPassword();
+
+        //Переназначаем действие кнопки вверх для получения анимации перехода
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //if you want to go one activity back then put onBackPressed() method
+                onBackPressed();
+            }
+        });
     }
 
 
@@ -40,7 +47,7 @@ public class SettingsActivity extends AppCompatActivity {
      * переключении сложности
      */
     private void saveSettings() {
-        editor = MainActivity.getMySharedPreference().edit();
+        SharedPreferences.Editor editor = MainActivity.getMySharedPreference().edit();
         editor.putInt(MainActivity.PASSWORD_LENGTH, PasswordCreator.passwordLength);
         editor.putBoolean(MainActivity.PASSWORD_HARD, PasswordCreator.strongPassword);
         editor.apply();
@@ -86,5 +93,13 @@ public class SettingsActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        super.onBackPressed();
+        SettingsActivity.this.overridePendingTransition(R.anim.translate_up,
+                R.anim.translate_upper);
     }
 }
