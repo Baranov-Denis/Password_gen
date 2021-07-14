@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Password Generator</string>
-    <string name="location">Enter site name:</string>
+    <string name="location">Enter recourse name:</string>
     <string name="key_word">Enter key word:</string>
     <string name="your_password">Your password:</string>
     <string name="generate">Generate!</string>
@@ -9,7 +9,12 @@
     <string name="help">Help</string>
     <string name="password_complexity">More strong password</string>
     <string name="settings">Settings</string>
-    <string name="help_text">Now you no longer need to remember a lot of passwords for different sites!
+    <string name="help_text_0">text 0</string>
+    <string name="help_text_1">Now you no longer need to remember a lot of passwords for different sites!
 Now it is possible to make the process of creating passwords very simple. First, you will need to choose the length of your new password. The longer, the better. Then you need to enter a word or several words in the upper field of the application that you associate with the service for which you need to choose a password, for example, "Mailbox". And in the lower field, you need to enter a keyword that can be the same for all your passwords. For example, "password", Then the application will use a special algorithm to generate a complex password from large and small English letters, as well as from special characters. The idea is that</string>
 
+    <string name="help_text_2">еуче3Б</string>
+    <string name="help_text_3">Главная особенность в том, что каждый раз когда вы будете вводить комбинацию из названия ресурса (либо слова
+        которое ассоциируется с этим ресурсом) и ключевого слова, то будете получать один и тот же сложный пароль.
+        При этом приложение не запоминает и не хранит ваши пароли!</string>
 </resources>
