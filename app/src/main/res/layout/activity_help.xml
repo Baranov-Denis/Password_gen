@@ -47,6 +47,7 @@
                     android:textSize="20sp" />
 
                 <ImageView
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginVertical="20dp"
                     android:adjustViewBounds="true"
                     android:layout_width="wrap_content"
@@ -64,11 +65,13 @@
                     android:textSize="20sp" />
 
                 <ImageView
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="20dp"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/test_light">
+                    android:src="@drawable/test_light"
+                   >
 
                 </ImageView>
 

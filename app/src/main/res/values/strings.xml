@@ -9,12 +9,23 @@
     <string name="help">Help</string>
     <string name="password_complexity">More strong password</string>
     <string name="settings">Settings</string>
-    <string name="help_text_0">text 0</string>
-    <string name="help_text_1">Now you no longer need to remember a lot of passwords for different sites!
-Now it is possible to make the process of creating passwords very simple. First, you will need to choose the length of your new password. The longer, the better. Then you need to enter a word or several words in the upper field of the application that you associate with the service for which you need to choose a password, for example, "Mailbox". And in the lower field, you need to enter a keyword that can be the same for all your passwords. For example, "password", Then the application will use a special algorithm to generate a complex password from large and small English letters, as well as from special characters. The idea is that</string>
 
-    <string name="help_text_2">еуче3Б</string>
-    <string name="help_text_3">Главная особенность в том, что каждый раз когда вы будете вводить комбинацию из названия ресурса (либо слова
-        которое ассоциируется с этим ресурсом) и ключевого слова, то будете получать один и тот же сложный пароль.
-        При этом приложение не запоминает и не хранит ваши пароли!</string>
+    <string name="help_text_0">You no longer need to remember a lot of passwords for different sites!</string>
+
+    <string name="help_text_1">You no longer need to remember a lot of passwords for different sites!Now it has become
+it is possible to make the process of creating passwords very simple. To get started, you can visit the settings section. Here you can ask
+the length of your new password. And there is also a switch for using a more complex password. When the option is selected
+use a more complex password, use a larger number of characters and characters. It is recommended to disable this feature
+only if the service imposes special requirements for the use of characters in the password and does not allow you to set the generated password.</string>
+
+    <string name="help_text_2">Then, in the main window, enter the word, several, in the upper field of the application
+words or a number that you associate with the resource for which you need to choose a password, for example, "Mailbox". And in the lower field you need to enter
+a keyword that can be the same for all your passwords. For example, "password". After that, click the "GENERATE" button and the application using
+a special algorithm will generate a complex password from large and small English letters, as well as from special characters.
+At the same time, it will not need to be rewritten manually - it will be copied to
+clipboard and you will only have to paste it into the necessary field for registration or logging in to your account.</string>
+
+    <string name="help_text_3">The main feature is that every time you enter a combination of the resource name (or words
+which is associated with this resource) and the keyword, then you will receive the same complex password.
+At the same time, the application does not remember or store your passwords!</string>
 </resources>
