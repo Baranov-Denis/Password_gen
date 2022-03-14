@@ -82,7 +82,7 @@
             style="@style/background_style">
 
             <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switch1"
+                android:id="@+id/switchForTypeGeneration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"

@@ -56,7 +56,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     //Подключение переключателя для изменения сложности пароля
     private void addSwitchForStrongPassword() {
-        SwitchCompat switch1 = findViewById(R.id.switch1);
+        SwitchCompat switch1 = findViewById(R.id.switchForTypeGeneration);
         switch1.setChecked(PasswordCreator.strongPassword);
         switch1.setOnCheckedChangeListener((buttonView, isChecked) -> {
             PasswordCreator.strongPassword = isChecked;

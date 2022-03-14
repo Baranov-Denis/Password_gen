@@ -2,6 +2,7 @@ package com.example.passwordgenerator;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.ClipData;
@@ -10,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         //Подключение toolBar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        addSwitchForStrongPassword();
 
     }
 
@@ -98,49 +102,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-//
-//    //Подключение переключателя для изменения сложности пароля
-//    private void addSwitchForStrongPassword(){
-//        SwitchCompat switch1 = findViewById(R.id.switch1);
-//
-//        switch1.setOnCheckedChangeListener((buttonView, isChecked) ->{
-//
-//            if(isChecked){
-//                strongPassword = true;
-//
-//            }else{
-//                strongPassword = false;
-//
-//            }
-//        });
-//    }
 
-//    private void setPasswordLengthToTextView() {
-//        TextView textView =  findViewById(R.id.seekBarValue);
-//        textView.setText(String.valueOf(passwordCreator.getPasswordLength()));
-//    }
 
-//    private void setSeekBar() {
-//        SeekBar seekBar =  findViewById(R.id.seekBar);
-//        TextView textView = findViewById(R.id.seekBarValue);
-//        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                textView.setText(String.valueOf(progress));
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//        });
-//    }
 
+
+
+
+    private void addSwitchForStrongPassword() {
+        SwitchCompat switch1 = findViewById(R.id.switchForTypeOfModelGeneration);
+        switch1.setChecked(!PasswordCreator.oldGeneration);
+        switch1.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            PasswordCreator.oldGeneration = !isChecked;
+        });
+    }
 
     private void setOnClickButton() {
         Button generateButton = findViewById(R.id.generate_button);
@@ -153,15 +127,26 @@ public class MainActivity extends AppCompatActivity {
         EditText keyEdit = findViewById(R.id.get_key_word);
         String resourceName = resourceNameEdit.getText().toString();
         String key = keyEdit.getText().toString();
-        //  SeekBar seekBar = findViewById(R.id.seekBar);
-        //  int passwordLength = seekBar.getProgress();
+        TextView passwordField = findViewById(R.id.generated_password);
 
         if (!resourceName.equals("") && !key.equals("")) {
             generatedPassword = passwordCreator.createPassword(resourceName, key);
-            TextView passwordField = findViewById(R.id.generated_password);
             passwordField.setText(generatedPassword);
             copyPasswordToClipboard(generatedPassword);
         }
+
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
+                resourceNameEdit.setText("");
+                keyEdit.setText("");
+                passwordField.setText("");
+            }
+        }, 5000);
+
 
     }
 

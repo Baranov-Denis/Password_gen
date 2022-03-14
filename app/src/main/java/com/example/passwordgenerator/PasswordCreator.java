@@ -1,6 +1,15 @@
 package com.example.passwordgenerator;
 
 public class PasswordCreator {
+
+    public static boolean oldGeneration = true;
+
+
+
+    public void setOldGeneration(boolean oldGeneration) {
+        this.oldGeneration = oldGeneration;
+    }
+
     /**
      * Длинна пароля по умолчанию через геттер передаётся на главный экран
      * При вызове метода createPassword(String resourceName, String key, int passwordLength, boolean strongPassword)
@@ -18,7 +27,7 @@ public class PasswordCreator {
     /**
      * Массив из всех символов a-z A-Z и символы
      * Каждое число обозначает числовое представление символа
-     *
+     * <p>
      * char x = (char) 33;
      * Равносильно следующей записи:
      * char x = (char) fullCharArray[0];
@@ -50,9 +59,6 @@ public class PasswordCreator {
     private final static int VAR_2 = 69;
 
 
-
-
-
     public String createPassword(String resourceName, String key) {
         return startCreatingString(resourceName, key);
     }
@@ -68,7 +74,6 @@ public class PasswordCreator {
 
 
     /**
-     *
      * @param stringForCorrection
      * @param variation
      * @return
@@ -80,7 +85,11 @@ public class PasswordCreator {
 
         while (stringForCorrection.length() < passwordLength) {
             for (int i = 0; i < stringForCorrection.length(); i++) {
-                tempBuilder.append((char) (stringForCorrection.charAt(i) + i + 1));
+                if (oldGeneration) {
+                    tempBuilder.append((char) (stringForCorrection.charAt(i) + i + 1));
+                } else {
+                    tempBuilder.append((char) (stringForCorrection.charAt(i) * createVariableNumber(tempBuilder.toString()) - stringForCorrection.charAt(stringForCorrection.length() - (i + 1))));
+                }
             }
             stringForCorrection = tempBuilder.toString();
 
@@ -93,7 +102,12 @@ public class PasswordCreator {
         }
 
         for (int b = 0; b < passwordLength; b++) {
-            int tempChar = (charHash - (stringForCorrection.charAt(b) * variation));
+            int tempChar;
+            if (oldGeneration) {
+                tempChar = (charHash - (stringForCorrection.charAt(b) * variation));
+            } else {
+                tempChar = (charHash - (createVariableNumber(stringForCorrection) * variation));
+            }
             hashArray[b] = tempChar;
             charHash = tempChar;
         }
@@ -101,9 +115,37 @@ public class PasswordCreator {
         return hashArray;
     }
 
+    /**
+     * New method
+     * @param a
+     * @return
+     */
+    public int createVariableNumber(String a) {
+        int res = 1;
+
+        for (int i = 0; i < a.length(); i++) {
+
+            if (i < (a.length() - 1)) {
+
+                if (i % 2 == 0) {
+                    res = (a.charAt(i) * a.charAt(i + 1)) - res;
+                } else {
+                    res += (a.charAt(i) * a.charAt(i + 1)) + res;
+                }
+
+            } else {
+
+                res += res * a.charAt(a.length() / 2);
+
+            }
+        }
+
+        //System.out.println(res);
+        return res;
+    }
+
 
     /**
-     *
      * @return Метод возвращает массив чисел, которые
      * будут использованы в качестве индексов для извлечения номеров символов из
      * полного или урезанного массива.

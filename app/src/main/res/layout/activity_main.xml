@@ -114,6 +114,24 @@
                     style="@style/border_style" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                style="@style/background_style">
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchForTypeOfModelGeneration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/password_generation_model"
+                    android:layout_margin="10dp"
+                    android:theme="@style/text_color" />
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
