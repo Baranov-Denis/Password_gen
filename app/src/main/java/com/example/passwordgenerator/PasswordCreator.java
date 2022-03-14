@@ -2,7 +2,7 @@ package com.example.passwordgenerator;
 
 public class PasswordCreator {
 
-    public static boolean oldGeneration = true;
+    public static boolean oldGeneration = false;
 
 
 
