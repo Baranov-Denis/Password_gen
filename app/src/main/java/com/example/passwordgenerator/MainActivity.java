@@ -26,11 +26,20 @@ public class MainActivity extends AppCompatActivity {
 
     private PasswordCreator passwordCreator;
 
+
+
+   private  EditText resourceNameEdit ;
+   private  EditText keyEdit ;
+   private  TextView passwordField ;
+
     public static final String APP_PREFERENCES = "mySettings";
     public static final String PASSWORD_LENGTH = "password_length";
     public static final String PASSWORD_HARD = "password_hard";
+    public static final String HIDE_DATA = "hide_data";
+
     private static SharedPreferences mySharedPreference = null;
 
+    public static boolean hideUserDataAfterGeneration = true;
     public static SharedPreferences getMySharedPreference() {
         return mySharedPreference;
     }
@@ -38,8 +47,13 @@ public class MainActivity extends AppCompatActivity {
     ClipboardManager clipboardManager;
     ClipData clipData;
 
+    public Boolean getHideUserDataAfterGeneration() {
+        return hideUserDataAfterGeneration;
+    }
 
-
+    public void setHideUserDataAfterGeneration(Boolean hideUserDataAfterGeneration) {
+        this.hideUserDataAfterGeneration = hideUserDataAfterGeneration;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        addSwitchForStrongPassword();
+      //  addSwitchForStrongPassword();
 
     }
 
@@ -73,6 +87,10 @@ public class MainActivity extends AppCompatActivity {
         }
         if (mySharedPreference.contains(PASSWORD_HARD)) {
             PasswordCreator.strongPassword = mySharedPreference.getBoolean(PASSWORD_HARD, true);
+        }
+
+        if (mySharedPreference.contains(HIDE_DATA)) {
+            MainActivity.hideUserDataAfterGeneration = mySharedPreference.getBoolean(HIDE_DATA, true);
         }
     }
 
@@ -108,13 +126,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void addSwitchForStrongPassword() {
-        SwitchCompat switch1 = findViewById(R.id.switchForTypeOfModelGeneration);
-        switch1.setChecked(!PasswordCreator.oldGeneration);
-        switch1.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            PasswordCreator.oldGeneration = !isChecked;
-        });
-    }
 
     private void setOnClickButton() {
         Button generateButton = findViewById(R.id.generate_button);
@@ -123,11 +134,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void createPassword() {
         String generatedPassword = "";
-        EditText resourceNameEdit = findViewById(R.id.get_site_name);
-        EditText keyEdit = findViewById(R.id.get_key_word);
+      resourceNameEdit = findViewById(R.id.get_site_name);
+      keyEdit = findViewById(R.id.get_key_word);
         String resourceName = resourceNameEdit.getText().toString();
         String key = keyEdit.getText().toString();
-        TextView passwordField = findViewById(R.id.generated_password);
+       passwordField = findViewById(R.id.generated_password);
 
         if (!resourceName.equals("") && !key.equals("")) {
             generatedPassword = passwordCreator.createPassword(resourceName, key);
@@ -135,19 +146,32 @@ public class MainActivity extends AppCompatActivity {
             copyPasswordToClipboard(generatedPassword);
         }
 
-
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // Do something after 5s = 5000ms
-                resourceNameEdit.setText("");
-                keyEdit.setText("");
-                passwordField.setText("");
-            }
-        }, 5000);
+       /** resourceNameEdit.setText("");
+        keyEdit.setText("");*/
+       hideUserData();
 
 
+
+
+    }
+
+    private void hideUserData(){
+
+        if(hideUserDataAfterGeneration) {
+            final Handler handler = new Handler();
+
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    // Do something after 5s = 5000ms
+                    resourceNameEdit.setText("");
+                    keyEdit.setText("");
+                    passwordField.setText("");
+                }
+            }, 1000);
+
+
+        }
     }
 
     private void copyPasswordToClipboard(String generatedPassword) {

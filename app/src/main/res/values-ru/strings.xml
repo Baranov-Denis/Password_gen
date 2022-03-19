@@ -10,6 +10,7 @@
     <string name="settings">Настройки</string>
     <string name="password_complexity">Более сложный пароль</string>
     <string name="password_generation_model">Новая модель генерации</string>
+    <string name="hide_user_data">Скрывать данные пользователя после создания пароля</string>
     <string name="help_text_0">Вам больше не нужно запоминать множество паролей для различных сайтов!</string>
     <string name="help_text_1">Теперь стало
         возможным сделать процесс создания паролей очень простым. Для начала вы можете посетить раздел настроек. Тут вы можете задать

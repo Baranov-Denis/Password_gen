@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -28,6 +29,8 @@ public class SettingsActivity extends AppCompatActivity {
         setSeekBar();
         setPasswordLengthToTextView();
         addSwitchForStrongPassword();
+        addSwitchForOldTypeGenerationPassword();
+        addSwitchForHideUserData();
 
         //Переназначаем действие кнопки вверх для получения анимации перехода
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -50,6 +53,7 @@ public class SettingsActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = MainActivity.getMySharedPreference().edit();
         editor.putInt(MainActivity.PASSWORD_LENGTH, PasswordCreator.passwordLength);
         editor.putBoolean(MainActivity.PASSWORD_HARD, PasswordCreator.strongPassword);
+        editor.putBoolean(MainActivity.HIDE_DATA, MainActivity.hideUserDataAfterGeneration);
         editor.apply();
     }
 
@@ -101,5 +105,23 @@ public class SettingsActivity extends AppCompatActivity {
         super.onBackPressed();
         SettingsActivity.this.overridePendingTransition(R.anim.translate_up,
                 R.anim.translate_upper);
+    }
+
+    private void addSwitchForOldTypeGenerationPassword() {
+        SwitchCompat switch1 = findViewById(R.id.switchForTypeOfModelGeneration);
+        switch1.setChecked(!PasswordCreator.oldGeneration);
+        switch1.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            PasswordCreator.oldGeneration = !isChecked;
+        });
+    }
+
+    private void addSwitchForHideUserData() {
+        SwitchCompat switch1 = findViewById(R.id.switchForHideUserData);
+        switch1.setChecked(MainActivity.hideUserDataAfterGeneration);
+        switch1.setOnCheckedChangeListener((buttonView, isChecked) -> {
+           MainActivity.hideUserDataAfterGeneration = isChecked;
+            saveSettings();
+        });
+
     }
 }
